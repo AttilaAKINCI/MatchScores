@@ -48,7 +48,7 @@ class NewsViewModel @ViewModelInject constructor(
                     isNodata.value = true
                 }
             } catch (exception: Exception) {
-                Timber.d("News List retrofit api error: ${exception.message}")
+                Timber.e("News List retrofit api error: ${exception.message}")
                 isNetworkError.value = true
             }
         }
