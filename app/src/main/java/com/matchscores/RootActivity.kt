@@ -32,7 +32,12 @@ class RootActivity : AppCompatActivity() {
         // tell navigation controller that which fragments will be at the top of backstack
         // (hides backbutton for fragments which are placed at top)
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.splashScreenFragment, R.id.newsFragment, R.id.scoresFragment, R.id.standingsFragment)
+            setOf(
+                R.id.splashScreenFragment,
+                R.id.newsFragment,
+                R.id.scoresFragment,
+                R.id.scoreFragmentWithComponent,
+                R.id.standingsFragment )
         )
 
         // remove extra padding between arrow and toolbar title
@@ -58,6 +63,10 @@ class RootActivity : AppCompatActivity() {
                             DropDownMenu.DropDownItems.SCORES -> {
                                 Timber.d("Dropdown clicked for SCORES")
                                 navigationController.navigate(R.id.scoresFragment)
+                            }
+                            DropDownMenu.DropDownItems.SCORES_AS_COMPONENT -> {
+                                Timber.d("Dropdown clicked for SCORES AS COMPONENT")
+                                navigationController.navigate(R.id.scoreFragmentWithComponent)
                             }
                             DropDownMenu.DropDownItems.STANDINGS -> {
                                 Timber.d("Dropdown clicked for STANDINGS")

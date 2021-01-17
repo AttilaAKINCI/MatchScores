@@ -6,4 +6,7 @@
     <dimen name="margin10">10dp</dimen>
     <dimen name="borderHeight">2dp</dimen>
 
+    <!--  ScoreBoard text views  -->
+    <dimen name="textSize">14sp</dimen>
+
 </resources>

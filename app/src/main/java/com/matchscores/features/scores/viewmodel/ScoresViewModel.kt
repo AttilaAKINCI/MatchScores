@@ -8,7 +8,6 @@ import com.matchscores.commons.network.NetworkHelper
 import com.matchscores.features.scores.api.ScoresServiceContract
 import com.matchscores.features.scores.model.Score
 import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.ticker
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

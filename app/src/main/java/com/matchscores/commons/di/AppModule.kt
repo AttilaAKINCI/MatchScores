@@ -1,6 +1,7 @@
 package com.matchscores.commons.di
 
 import android.content.Context
+import com.matchscores.BuildConfig
 import com.matchscores.commons.network.NetworkHelper
 import dagger.Module
 import dagger.Provides
@@ -47,7 +48,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideOkHttpClient() : OkHttpClient =
-        if (RestConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             // debug logging activated
             val logger = HttpLoggingInterceptor()
             logger.level = HttpLoggingInterceptor.Level.BODY

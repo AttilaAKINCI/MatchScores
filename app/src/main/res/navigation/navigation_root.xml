@@ -44,6 +44,10 @@
         android:label="@string/scores_title" >
     </fragment>
     <fragment
+        android:id="@+id/scoreFragmentWithComponent"
+        android:name="com.matchscores.features.scores.view.ScoreFragmentWithComponent"
+        android:label="@string/scores_title_2" />
+    <fragment
         android:id="@+id/standingsFragment"
         android:name="com.matchscores.features.standings.view.StandingsFragment"
         android:label="@string/standings_title" />

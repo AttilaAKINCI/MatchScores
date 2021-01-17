@@ -25,6 +25,7 @@ class DropDownMenu : LinearLayout {
     enum class DropDownItems {
         NEWS,
         SCORES,
+        SCORES_AS_COMPONENT,
         STANDINGS
     }
 
@@ -40,6 +41,9 @@ class DropDownMenu : LinearLayout {
         val scoresLayout = createContainer()
         scoresLayout.setOnClickListener {  dropDownClickListener?.dropDownClicked(DropDownItems.SCORES) }
 
+        val scoresAsComponentLayout = createContainer()
+        scoresAsComponentLayout.setOnClickListener {  dropDownClickListener?.dropDownClicked(DropDownItems.SCORES_AS_COMPONENT) }
+
         val standingsLayout = createContainer()
         standingsLayout.setOnClickListener {  dropDownClickListener?.dropDownClicked(DropDownItems.STANDINGS) }
 
@@ -49,12 +53,17 @@ class DropDownMenu : LinearLayout {
         val scoresTextView = createMenuText(resources.getString(R.string.scores_title))
         scoresLayout.addView(scoresTextView)
 
+        val scoresTextView2 = createMenuText(resources.getString(R.string.scores_title_2))
+        scoresAsComponentLayout.addView(scoresTextView2)
+
         val standingsTextView = createMenuText(resources.getString(R.string.standings_title))
         standingsLayout.addView(standingsTextView)
 
         addView(newsLayout)
         addView(createBorder())
         addView(scoresLayout)
+        addView(createBorder())
+        addView(scoresAsComponentLayout)
         addView(createBorder())
         addView(standingsLayout)
         addView(createBorder())

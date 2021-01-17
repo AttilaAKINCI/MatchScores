@@ -13,6 +13,7 @@
 
     <!-- Scores -->
     <string name="scores_title">Skorlar</string>
+    <string name="scores_title_2">Skorlar (komponent tasarımı)</string>
     <string name="scores_no_data">Skor bilgisi bulunamadı.</string>
 
     <!-- Standings -->

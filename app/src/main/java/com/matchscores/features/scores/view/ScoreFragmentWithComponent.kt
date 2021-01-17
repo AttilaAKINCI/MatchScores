@@ -9,18 +9,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.matchscores.R
 import com.matchscores.commons.component.base.BaseFragment
-import com.matchscores.commons.component.list.ShimmerAdapter
-import com.matchscores.commons.component.list.ShimmerType
-import com.matchscores.databinding.FragmentScoresBinding
-import com.matchscores.features.scores.components.ScoresListAdapter
+import com.matchscores.databinding.FragmentScoreWithComponentBinding
 import com.matchscores.features.scores.viewmodel.ScoresViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
-class ScoresFragment : BaseFragment() {
+class ScoreFragmentWithComponent : BaseFragment() {
 
-    private lateinit var binding : FragmentScoresBinding
+    private lateinit var binding : FragmentScoreWithComponentBinding
     private val scoresViewModel : ScoresViewModel by viewModels()
 
     override fun hasDropDownMenu() = true
@@ -31,24 +27,17 @@ class ScoresFragment : BaseFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
 
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scores, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score_with_component, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
-        // start with initial shimmer adapter
-        binding.recyclerScoreList.adapter = ShimmerAdapter(ShimmerType.SCORE)
         binding.vm = scoresViewModel
 
-        // news listing adapter
-        val scoreListAdapter = ScoresListAdapter()
-
         scoresViewModel.scores.observe(viewLifecycleOwner, {
-            binding.recyclerScoreList.adapter = scoreListAdapter
-            scoreListAdapter.submitList(it)
-
+            if(it.isNotEmpty()){ binding.scoresProgressBar.visibility = View.GONE }
             Toast.makeText(context, "Skorlar güncellendi", Toast.LENGTH_SHORT).show()
         })
 
-        Timber.d("ScoresFragment created..")
+        // Inflate the layout for this fragment
         return binding.root
     }
+
 }

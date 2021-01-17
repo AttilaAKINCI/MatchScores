@@ -1,8 +1,8 @@
 package com.matchscores.commons.application
 
 import android.util.Log
-import androidx.multidex.BuildConfig
 import androidx.multidex.MultiDexApplication
+import com.matchscores.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
