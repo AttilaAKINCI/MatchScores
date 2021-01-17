@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import com.matchscores.R
 import com.matchscores.commons.component.base.BaseFragment
 import com.matchscores.databinding.FragmentNewsDetailBinding
+import timber.log.Timber
 
 class NewsDetailFragment : BaseFragment() {
 
@@ -30,10 +31,12 @@ class NewsDetailFragment : BaseFragment() {
         binding.webView.webViewClient = WebViewDelegate(
             {
                 //on load completed.
+                Timber.d("Webview loaded..")
                 binding.progressBar.visibility = View.GONE
                 binding.webView.visibility = View.VISIBLE
             }, {
                 // on error occurred while loading
+                Timber.d("Webview couldnt be loaded..")
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(activity, "Got Error! $it", Toast.LENGTH_SHORT).show()
             }
@@ -41,6 +44,7 @@ class NewsDetailFragment : BaseFragment() {
 
         binding.webView.loadUrl(newsDetailArgs.newslink)
 
+        Timber.d("NewsDetailFragment created..")
         return binding.root
     }
 

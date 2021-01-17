@@ -12,6 +12,7 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.ticker
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,8 +36,10 @@ class ScoresViewModel @ViewModelInject constructor(
             fetchMatches()
         }else{
             // network error
+            Timber.d("News List Network error..")
             isNetworkError.value = true
         }
+        Timber.d("ScoresViewModel created..")
     }
 
     @ObsoleteCoroutinesApi
@@ -79,12 +82,14 @@ class ScoresViewModel @ViewModelInject constructor(
                         }
 
                         scores.value = localScore
-
+                        Timber.d("Score api service fetched ${scoresModel.matches.size} matches")
                     }else{
+                        Timber.d("News List no data..")
                         isNodata.value = true
                     }
                 }
             } catch (exception: Exception) {
+                Timber.e("News List retrofit api error : ${exception.message}")
                 isNetworkError.value = true
             }
         }

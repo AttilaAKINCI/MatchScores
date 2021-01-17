@@ -16,6 +16,7 @@ import com.matchscores.databinding.FragmentScoresBinding
 import com.matchscores.features.scores.components.ScoresListAdapter
 import com.matchscores.features.scores.viewmodel.ScoresViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ScoresFragment : BaseFragment() {
@@ -48,6 +49,7 @@ class ScoresFragment : BaseFragment() {
             Toast.makeText(context, "Skorlar güncellendi", Toast.LENGTH_SHORT).show()
         })
 
+        Timber.d("ScoresFragment created..")
         return binding.root
     }
 }

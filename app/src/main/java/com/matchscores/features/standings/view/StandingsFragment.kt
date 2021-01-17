@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.matchscores.R
 import com.matchscores.commons.component.base.BaseFragment
 import com.matchscores.databinding.FragmentStandingsBinding
+import timber.log.Timber
 
 class StandingsFragment : BaseFragment() {
 
@@ -22,6 +23,7 @@ class StandingsFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_standings, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        Timber.d("StandingsFragment created..")
         return binding.root
     }
 }

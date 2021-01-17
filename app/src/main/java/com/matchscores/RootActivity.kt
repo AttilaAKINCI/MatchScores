@@ -13,6 +13,7 @@ import com.matchscores.commons.component.widget.DropDownClickListener
 import com.matchscores.commons.component.widget.DropDownMenu
 import com.matchscores.databinding.ActivityRootBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class RootActivity : AppCompatActivity() {
@@ -51,13 +52,17 @@ class RootActivity : AppCompatActivity() {
                     if(selectedMenuItem != item){
                         when(item){
                             DropDownMenu.DropDownItems.NEWS -> {
+                                Timber.d("Dropdown clicked for NEWS")
                                 navigationController.navigate(R.id.newsFragment)
                             }
                             DropDownMenu.DropDownItems.SCORES -> {
+                                Timber.d("Dropdown clicked for SCORES")
                                 navigationController.navigate(R.id.scoresFragment)
                             }
-                            DropDownMenu.DropDownItems.STANDINGS ->
+                            DropDownMenu.DropDownItems.STANDINGS -> {
+                                Timber.d("Dropdown clicked for STANDINGS")
                                 navigationController.navigate(R.id.standingsFragment)
+                            }
                         }
                     }
                     selectedMenuItem = item

@@ -9,6 +9,7 @@ import com.matchscores.features.news.list.api.NewsServiceContract
 import com.matchscores.features.news.list.model.NewsModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class NewsViewModel @ViewModelInject constructor(
     private val newsService: NewsServiceContract,
@@ -26,8 +27,10 @@ class NewsViewModel @ViewModelInject constructor(
             fetchNews()
         }else{
             // network error
+            Timber.d("News List Network error..")
             isNetworkError.value = true
         }
+        Timber.d("NewsViewModel created..")
     }
 
     private fun fetchNews() {
@@ -39,10 +42,13 @@ class NewsViewModel @ViewModelInject constructor(
                 val newsModel = newsService.fetchNews()
                 if(newsModel.news.isNotEmpty()){
                     news.value = newsModel
+                    Timber.d("News api service fetched ${newsModel.news.size} news")
                 }else{
+                    Timber.d("News List nodata..")
                     isNodata.value = true
                 }
             } catch (exception: Exception) {
+                Timber.d("News List retrofit api error: ${exception.message}")
                 isNetworkError.value = true
             }
         }

@@ -44,7 +44,7 @@ class NewsFragment : BaseFragment() {
         // news listing adapter
         val newsListAdapter = NewsListAdapter(clickListener = { newsLink ->
             // catch news row clicks and navigate to news Detail fragment
-            Timber.i("Navigation to news detail fragment")
+            Timber.d("Navigation to news detail fragment")
 
             NavHostFragment.findNavController(this).navigate(
                 actionNewsFragmentToNewsDetailFragment(newsLink),
@@ -58,6 +58,7 @@ class NewsFragment : BaseFragment() {
             newsListAdapter.submitList(it.news)
         })
 
+        Timber.d("NewsFragment created..")
         return binding.root
     }
 

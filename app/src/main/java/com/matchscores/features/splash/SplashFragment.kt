@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.matchscores.R
 import com.matchscores.commons.component.base.BaseFragment
 import com.matchscores.databinding.FragmentSplashBinding
+import timber.log.Timber
 
 class SplashFragment : BaseFragment() {
 
@@ -30,6 +31,7 @@ class SplashFragment : BaseFragment() {
 
         navigateToNewsList()
 
+        Timber.d("SplashFragment created..")
         return binding.root
     }
 
@@ -42,17 +44,6 @@ class SplashFragment : BaseFragment() {
                         .setPopUpTo(R.id.splashScreenFragment,
                             true).build()
                 )
-
-//TODO üst menüye aktarilacak.
-//            NavHostFragment.findNavController(this)
-//                .navigate(R.id.action_splashScreenFragment_to_scoresFragment,
-//                    null,
-//                    NavOptions.Builder()
-//                        .setPopUpTo(R.id.splashScreenFragment,
-//                            true).build()
-//                )
-
-
         }, 1000)
     }
 }
