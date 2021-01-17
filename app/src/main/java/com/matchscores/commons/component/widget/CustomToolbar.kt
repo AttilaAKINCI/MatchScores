@@ -5,13 +5,14 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
-import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.matchscores.R
@@ -32,7 +33,7 @@ class CustomToolbar : Toolbar {
 
     lateinit var container:RelativeLayout
     private lateinit var leftBarContainer:LinearLayout
-    private lateinit var rightBarContainer:LinearLayout
+    private lateinit var rightBarContainer:CardView
     private lateinit var titleTextView:AppCompatTextView
     lateinit var clickListener: OnClickListener
 
@@ -79,8 +80,7 @@ class CustomToolbar : Toolbar {
         leftBarContainer.addView(titleTextView)
         container.addView(leftBarContainer)
 
-        rightBarContainer = LinearLayout(context)
-        rightBarContainer.orientation = LinearLayout.HORIZONTAL
+        rightBarContainer = CardView(context)
         val rightBarLayoutParams = RelativeLayout.LayoutParams(
             LayoutParams.WRAP_CONTENT,
             LayoutParams.MATCH_PARENT
@@ -110,7 +110,7 @@ class CustomToolbar : Toolbar {
         val iconUp = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_up, context.theme)
         iconUp?.setTint(startColor)
         rightBarContainer.findViewWithTag<ImageView>(dropDownImageTag).background = iconUp
-        rightBarContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
+        rightBarContainer.setBackgroundResource(R.drawable.card_view_background)
         dropDownActive = true
     }
     fun addDropDownMenuIcon(){
@@ -118,11 +118,12 @@ class CustomToolbar : Toolbar {
         val imageView = ImageView(context)
         imageView.tag = dropDownImageTag
 
-        val imageViewLayoutParams = LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        imageViewLayoutParams.gravity = Gravity.END or Gravity.CENTER_VERTICAL
+        val imageViewLayoutParams = FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+        imageViewLayoutParams.gravity = Gravity.CENTER
         imageViewLayoutParams.marginEnd = resources.getDimensionPixelSize(R.dimen.right_bar_icon_margin_end)
         imageViewLayoutParams.marginStart = resources.getDimensionPixelSize(R.dimen.right_bar_icon_margin_end)
         imageView.layoutParams = imageViewLayoutParams
+        imageView.foregroundGravity = Gravity.CENTER
 
         imageView.setOnClickListener {
             if(!dropDownActive){
