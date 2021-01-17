@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -99,24 +100,36 @@ class CustomToolbar : Toolbar {
     fun showDropDownMenuIcon(isShow : Int) { rightBarContainer.visibility = isShow }
     fun closeDropDownIcon(){
         val startColor = ContextCompat.getColor(context, R.color.mainBg)
-        val iconDown = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_down, context.theme)
-        iconDown?.setTint(startColor)
-        rightBarContainer.findViewWithTag<ImageView>(dropDownImageTag).background = iconDown
+        val iconUp = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_up, context.theme)
+        iconUp?.setTint(startColor)
+        rightBarContainer.findViewWithTag<ImageView>(dropDownImageTag).background = iconUp
+        val passiveStateAnim = AnimationUtils.loadAnimation(context, R.anim.rotate_down)
+        rightBarContainer.findViewWithTag<ImageView>(dropDownImageTag).startAnimation(passiveStateAnim)
+
         rightBarContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
         dropDownActive = false
     }
     private fun openDropDownIcon(){
         val startColor = ContextCompat.getColor(context, R.color.mainBg)
-        val iconUp = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_up, context.theme)
-        iconUp?.setTint(startColor)
-        rightBarContainer.findViewWithTag<ImageView>(dropDownImageTag).background = iconUp
+        val iconDown = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_down, context.theme)
+        iconDown?.setTint(startColor)
+        rightBarContainer.findViewWithTag<ImageView>(dropDownImageTag).background = iconDown
+        val activeStateAnim = AnimationUtils.loadAnimation(context, R.anim.rotate_up)
+        rightBarContainer.findViewWithTag<ImageView>(dropDownImageTag).startAnimation(activeStateAnim)
+
         rightBarContainer.setBackgroundResource(R.drawable.card_view_background)
         dropDownActive = true
     }
     fun addDropDownMenuIcon(){
-
         val imageView = ImageView(context)
         imageView.tag = dropDownImageTag
+
+        //set initial icon
+        val startColor = ContextCompat.getColor(context, R.color.mainBg)
+        val iconDown = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_down, context.theme)
+        rightBarContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
+        iconDown?.setTint(startColor)
+        imageView.background = iconDown
 
         val imageViewLayoutParams = FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         imageViewLayoutParams.gravity = Gravity.CENTER
@@ -135,6 +148,5 @@ class CustomToolbar : Toolbar {
         }
 
         rightBarContainer.addView(imageView)
-        closeDropDownIcon()
     }
 }
