@@ -1,19 +1,21 @@
 package com.matchscores.commons.component.widget
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.matchscores.R
+
 
 class CustomToolbar : Toolbar {
     constructor(context: Context) : super(context) { initialize(context, null, 0) }
@@ -33,6 +35,9 @@ class CustomToolbar : Toolbar {
     private lateinit var rightBarContainer:LinearLayout
     private lateinit var titleTextView:AppCompatTextView
     lateinit var clickListener: OnClickListener
+
+    var dropDownActive = false
+    private val dropDownImageTag = "TAG"
 
     private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int){
 
@@ -57,7 +62,13 @@ class CustomToolbar : Toolbar {
         titleTextView.isSingleLine = true
         titleTextView.ellipsize = TextUtils.TruncateAt.END
         titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20F)
-        titleTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.colorSoftWhite, context.theme))
+        titleTextView.setTextColor(
+            ResourcesCompat.getColor(
+                resources,
+                R.color.colorSoftWhite,
+                context.theme
+            )
+        )
         val titleLayoutParams = LinearLayout.LayoutParams(
             LayoutParams.WRAP_CONTENT,
             LayoutParams.WRAP_CONTENT
@@ -85,22 +96,44 @@ class CustomToolbar : Toolbar {
     }
 
     override fun setTitle(title: CharSequence?) { titleTextView.text = title }
-    fun resetBarItems(){ rightBarContainer.removeAllViews() }
-    fun setRightBarIcon(drawable: Drawable){
-        resetBarItems()
-        val imageView = ImageView(context)
-        imageView.background = drawable
+    fun showDropDownMenuIcon(isShow : Int) { rightBarContainer.visibility = isShow }
+    fun closeDropDownIcon(){
+        val startColor = ContextCompat.getColor(context, R.color.mainBg)
+        val iconDown = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_down, context.theme)
+        iconDown?.setTint(startColor)
+        rightBarContainer.findViewWithTag<ImageView>(dropDownImageTag).background = iconDown
+        rightBarContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
+        dropDownActive = false
+    }
+    private fun openDropDownIcon(){
+        val startColor = ContextCompat.getColor(context, R.color.mainBg)
+        val iconUp = ResourcesCompat.getDrawable(resources, R.drawable.ic_arrow_up, context.theme)
+        iconUp?.setTint(startColor)
+        rightBarContainer.findViewWithTag<ImageView>(dropDownImageTag).background = iconUp
+        rightBarContainer.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
+        dropDownActive = true
+    }
+    fun addDropDownMenuIcon(){
 
-        val imageViewLayoutParams = LinearLayout.LayoutParams(
-            LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT
-        )
+        val imageView = ImageView(context)
+        imageView.tag = dropDownImageTag
+
+        val imageViewLayoutParams = LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         imageViewLayoutParams.gravity = Gravity.END or Gravity.CENTER_VERTICAL
         imageViewLayoutParams.marginEnd = resources.getDimensionPixelSize(R.dimen.right_bar_icon_margin_end)
+        imageViewLayoutParams.marginStart = resources.getDimensionPixelSize(R.dimen.right_bar_icon_margin_end)
         imageView.layoutParams = imageViewLayoutParams
 
-        clickListener?.let { imageView.setOnClickListener(it) }
+        imageView.setOnClickListener {
+            if(!dropDownActive){
+                openDropDownIcon()
+            }else{
+                closeDropDownIcon()
+            }
+            clickListener?.onClick(it)
+        }
 
         rightBarContainer.addView(imageView)
+        closeDropDownIcon()
     }
 }

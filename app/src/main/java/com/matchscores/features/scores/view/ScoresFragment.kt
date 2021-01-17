@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -22,12 +23,12 @@ class ScoresFragment : BaseFragment() {
     private lateinit var binding : FragmentScoresBinding
     private val scoresViewModel : ScoresViewModel by viewModels()
 
+    override fun hasDropDownMenu() = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.show()
 
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scores, container, false)
@@ -35,6 +36,7 @@ class ScoresFragment : BaseFragment() {
 
         // start with initial shimmer adapter
         binding.recyclerScoreList.adapter = ShimmerAdapter(ShimmerType.SCORE)
+        binding.vm = scoresViewModel
 
         // news listing adapter
         val scoreListAdapter = ScoresListAdapter()
@@ -42,6 +44,8 @@ class ScoresFragment : BaseFragment() {
         scoresViewModel.scores.observe(viewLifecycleOwner, {
             binding.recyclerScoreList.adapter = scoreListAdapter
             scoreListAdapter.submitList(it)
+
+            Toast.makeText(context, "Skorlar güncellendi", Toast.LENGTH_SHORT).show()
         })
 
         return binding.root

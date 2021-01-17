@@ -25,6 +25,7 @@ class NewsFragment : BaseFragment() {
     private lateinit var binding : FragmentNewsBinding
     private val newsViewModel : NewsViewModel by viewModels()
 
+    override fun hasDropDownMenu() = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -16,16 +16,6 @@
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit"
             app:launchSingleTop="true" />
-
-        <action
-            android:id="@+id/action_splashScreenFragment_to_scoresFragment"
-            app:destination="@id/scoresFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@anim/fragment_fade_exit"
-            app:launchSingleTop="true" />
-
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -38,9 +28,6 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_newsFragment_to_scoresFragment"
-            app:destination="@id/scoresFragment"/>
     </fragment>
     <fragment
         android:id="@+id/newsDetailFragment"
@@ -55,9 +42,9 @@
         android:id="@+id/scoresFragment"
         android:name="com.matchscores.features.scores.view.ScoresFragment"
         android:label="@string/scores_title" >
-        <action
-            android:id="@+id/action_scoresFragment_to_newsFragment"
-            app:destination="@id/newsFragment"/>
     </fragment>
-
+    <fragment
+        android:id="@+id/standingsFragment"
+        android:name="com.matchscores.features.standings.view.StandingsFragment"
+        android:label="@string/standings_title" />
 </navigation>

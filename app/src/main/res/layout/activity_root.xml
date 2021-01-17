@@ -23,12 +23,19 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <com.matchscores.commons.component.widget.DropDownMenu
+            android:id="@+id/drop_down_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appBarLayout"
+            android:visibility="gone"/>
+
         <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/appBarLayout"
+            android:layout_below="@+id/drop_down_menu"
             app:defaultNavHost="true"
             app:navGraph="@navigation/navigation_root" />
 

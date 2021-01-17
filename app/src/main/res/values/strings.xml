@@ -15,7 +15,13 @@
     <string name="scores_title">Skorlar</string>
     <string name="scores_no_data">Skor bilgisi bulunamadı.</string>
 
+    <!-- Standings -->
+    <string name="standings_title">Statüler</string>
+    <string name="standings_detail">Waiting For Implementation</string>
+
     <!-- App-wide general messages -->
     <string name="network_err">Bağlantı sorunu oluştu. Lütfen daha sonra tekrar deneyin.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

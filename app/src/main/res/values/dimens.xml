@@ -3,4 +3,7 @@
     <!-- Custom Toolbar -->
     <dimen name="right_bar_icon_margin_end">18dp</dimen>
 
+    <dimen name="margin10">10dp</dimen>
+    <dimen name="borderHeight">2dp</dimen>
+
 </resources>

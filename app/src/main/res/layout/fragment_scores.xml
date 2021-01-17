@@ -58,7 +58,8 @@
                 android:id="@+id/recycler_score_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:visibility="@{(vm.isNodata || vm.isNetworkError) ? View.GONE : View.VISIBLE}"/>
 
     </RelativeLayout>
 </layout>
