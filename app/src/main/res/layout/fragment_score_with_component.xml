@@ -5,7 +5,7 @@
         <import type="android.view.View"/>
         <variable
             name="vm"
-            type="com.matchscores.features.scores.viewmodel.ScoresViewModel"/>
+            type="com.akinci.matchscores.features.scores.viewmodel.ScoresViewModel"/>
     </data>
 
         <RelativeLayout
@@ -57,7 +57,7 @@
                 android:layout_height="match_parent"
                 android:visibility="@{(vm.isNodata || vm.isNetworkError) ? View.GONE : View.VISIBLE}">
 
-                <com.matchscores.commons.component.widget.ScoreBoard
+                <com.akinci.matchscores.common.component.widget.ScoreBoard
                     android:id="@+id/score_board"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

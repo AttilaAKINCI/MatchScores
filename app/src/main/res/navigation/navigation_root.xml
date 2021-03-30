@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.matchscores.features.splash.SplashFragment" >
+        android:name="com.akinci.matchscores.features.splash.SplashFragment" >
         <action
             android:id="@+id/action_splashScreenFragment_to_newsFragment"
             app:destination="@id/newsFragment"
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.matchscores.features.news.list.view.NewsFragment"
+        android:name="com.akinci.matchscores.features.news.list.view.NewsFragment"
         android:label="@string/news_title" >
         <action
             android:id="@+id/action_newsFragment_to_newsDetailFragment"
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsDetailFragment"
-        android:name="com.matchscores.features.news.detail.view.NewsDetailFragment"
+        android:name="com.akinci.matchscores.features.news.detail.view.NewsDetailFragment"
         android:label="@string/news_detail_title" >
         <argument
             android:name="newslink"
@@ -40,15 +40,15 @@
     </fragment>
     <fragment
         android:id="@+id/scoresFragment"
-        android:name="com.matchscores.features.scores.view.ScoresFragment"
+        android:name="com.akinci.matchscores.features.scores.view.ScoresFragment"
         android:label="@string/scores_title" >
     </fragment>
     <fragment
         android:id="@+id/scoreFragmentWithComponent"
-        android:name="com.matchscores.features.scores.view.ScoreFragmentWithComponent"
+        android:name="com.akinci.matchscores.features.scores.view.ScoreFragmentWithComponent"
         android:label="@string/scores_title_2" />
     <fragment
         android:id="@+id/standingsFragment"
-        android:name="com.matchscores.features.standings.view.StandingsFragment"
+        android:name="com.akinci.matchscores.features.standings.view.StandingsFragment"
         android:label="@string/standings_title" />
 </navigation>
