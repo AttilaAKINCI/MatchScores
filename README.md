@@ -2,6 +2,8 @@
 MatchScores App
 
 Modernization in progress.... 
+Update about later :)
+
 
 # License
 
