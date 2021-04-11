@@ -4,16 +4,13 @@
     <!-- News List -->
     <string name="news_title">Haberler</string>
     <string name="news_no_data">Bugün için henüz yeni bir haber yok</string>
-    <string name="accessibility_news_information_nodata">News Listing no data</string>
-    <string name="accessibility_news_information_network_err">News Listing network error</string>
-    <string name="accessibility_news_row_image">News Image</string>
 
+    <string name="accessibility_string">Accessibility Image View</string>
     <!-- News Detail -->
     <string name="news_detail_title">Haber Detayı</string>
 
     <!-- Scores -->
     <string name="scores_title">Skorlar</string>
-    <string name="scores_title_2">Skorlar (komponent tasarımı)</string>
     <string name="scores_no_data">Skor bilgisi bulunamadı.</string>
 
     <!-- Standings -->

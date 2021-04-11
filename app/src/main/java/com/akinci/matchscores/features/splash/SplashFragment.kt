@@ -38,10 +38,10 @@ class SplashFragment : Fragment() {
     private fun navigateToNewsList(){
         Handler(Looper.getMainLooper()).postDelayed({
             NavHostFragment.findNavController(this)
-                .navigate(R.id.action_splashScreenFragment_to_newsFragment,
+                .navigate(R.id.action_splashFragment_to_newsFragment,
                     null,
                     NavOptions.Builder()
-                        .setPopUpTo(R.id.splashScreenFragment,
+                        .setPopUpTo(R.id.splashFragment,
                             true).build()
                 )
         }, 1000)

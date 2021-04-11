@@ -40,11 +40,11 @@ class ScoreBoard : LinearLayout {
         removeAllViews()
         data.value?.let {
             for(score in it) {
-                if(score.type == ScoreType.HEADER.ordinal){
-                    addView(createHeader(score.headerTitleAndTime))
-                } else {
+//                if(score.type == ScoreType.HEADER.ordinal){
+//                    addView(createHeader(score.headerTitleAndTime))
+//                } else {
                     addView(createScoreRow(score))
-                }
+             //  }
             }
         }
         Timber.d("ScoreBoard Component Updated with new data size:${data.value?.size}")

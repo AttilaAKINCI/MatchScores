@@ -39,7 +39,7 @@
                                 android:id="@+id/news_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:contentDescription="@string/accessibility_news_row_image"/>
+                                android:contentDescription="@string/accessibility_string"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -52,7 +52,7 @@
                             android:layout_toEndOf="@+id/news_image_container"
                             android:singleLine="true"
                             android:fontFamily="@font/ubuntu_medium"
-                            android:text="@{data.title}"/>
+                            android:text="title"/>
 
                         <TextView
                             android:id="@+id/description"
@@ -67,7 +67,7 @@
                             android:ellipsize="end"
                             android:maxLines="3"
                             android:fontFamily="@font/ubuntu"
-                            android:text="@{data.description}"/>
+                            android:text="desc"/>
 
                         <TextView
                             android:id="@+id/time"
@@ -79,7 +79,7 @@
                             android:layout_toEndOf="@+id/news_image_container"
                             android:singleLine="true"
                             android:fontFamily="@font/ubuntu_italic"
-                            android:text="@{data.date}"/>
+                            android:text="date"/>
 
                         <ImageView
                             android:id="@+id/arrow"
@@ -91,7 +91,7 @@
                             android:backgroundTintMode="src_in"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:contentDescription="@string/accessibility_news_row_image"/>
+                            android:contentDescription="@string/accessibility_string"/>
 
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>

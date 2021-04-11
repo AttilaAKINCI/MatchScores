@@ -16,50 +16,11 @@
         android:layout_height="match_parent"
         android:background="@color/mainBg">
 
-        <RelativeLayout
-            android:id="@+id/information_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:visibility="@{(vm.isNodata || vm.isNetworkError) ? View.VISIBLE : View.GONE}">
-
-            <ImageView
-                android:id="@+id/information_image"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:background="@{vm.isNodata ? @drawable/ic_no_data : @drawable/ic_network_err}"
-                android:tintMode="src_in"
-                android:contentDescription="@{vm.isNodata ? @string/accessibility_news_information_nodata : @string/accessibility_news_information_network_err}"
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_centerHorizontal="true"/>
-
-            <TextView
-                android:id="@+id/information_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/information_image"
-                android:layout_centerHorizontal="true"
-                android:text="@{vm.isNodata ? @string/news_no_data : @string/network_err}"
-                android:textAlignment="center"
-                android:textSize="18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_below="@+id/information_text"
-                android:background="@color/transparent"/>
-
-        </RelativeLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_news_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:visibility="@{(vm.isNodata || vm.isNetworkError) ? View.GONE : View.VISIBLE}"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </RelativeLayout>
 </layout>

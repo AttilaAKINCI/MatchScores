@@ -69,7 +69,7 @@
                     android:backgroundTintMode="src_in"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:contentDescription="@string/accessibility_row_image"/>
+                    android:contentDescription="@string/accessibility_string"/>
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

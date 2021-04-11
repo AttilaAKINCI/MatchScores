@@ -54,8 +54,8 @@ class ScoresFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         scoresViewModel.scores.observe(viewLifecycleOwner, {
-            binding.recyclerScoreList.adapter = scoreListAdapter
-            scoreListAdapter.submitList(it)
+//            binding.recyclerScoreList.adapter = scoreListAdapter
+//            scoreListAdapter.submitList(it)
 
             Toast.makeText(context, "Skorlar güncellendi", Toast.LENGTH_SHORT).show()
         })
