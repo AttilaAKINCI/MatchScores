@@ -2,24 +2,22 @@
     <string name="app_name">MatchScores</string>
 
     <!-- News List -->
-    <string name="news_title">Haberler</string>
-    <string name="news_no_data">Bugün için henüz yeni bir haber yok</string>
-
+    <string name="news_title">News</string>
+    <string name="news_no_data">There is not any updates today</string>
     <string name="accessibility_string">Accessibility Image View</string>
+
     <!-- News Detail -->
-    <string name="news_detail_title">Haber Detayı</string>
+    <string name="news_detail_title">News Detail</string>
 
     <!-- Scores -->
-    <string name="scores_title">Skorlar</string>
-    <string name="scores_no_data">Skor bilgisi bulunamadı.</string>
+    <string name="scores_title">Scores</string>
+    <string name="scores_no_data">There is not any score detail</string>
 
     <!-- Standings -->
-    <string name="standings_title">Statüler</string>
+    <string name="standings_title">Status</string>
     <string name="standings_detail">Waiting For Implementation</string>
 
     <!-- App-wide general messages -->
-    <string name="network_err">Bağlantı sorunu oluştu. Lütfen daha sonra tekrar deneyin.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="network_err">Connection error occurred. Please try again later</string>
 
 </resources>
