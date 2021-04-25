@@ -34,6 +34,8 @@ class NewsViewModel @Inject constructor(
             viewModelScope.launch(coroutineContext.IO) {
                 Timber.tag("fetchNews-VMScope").d("Top-level: current thread is ${Thread.currentThread().name}")
 
+                // send shimmer loading effect for first load
+                _news.postValue(Resource.Loading())
                 delay(1000) // simulate network delay
 
                 when(val newsResponse = newsRepository.fetchNews()){

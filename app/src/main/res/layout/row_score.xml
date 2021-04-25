@@ -11,6 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         android:baselineAligned="false">
 
@@ -47,9 +49,8 @@
                 android:layout_margin="10dp"
                 android:layout_gravity="center"
                 android:textAlignment="center"
-                android:text="@{data.fts_A + `     -     ` + data.fts_B}"
+                android:text="@{String.valueOf(data.fts_A) + `     -     ` + String.valueOf(data.fts_B)}"
                 tools:text="2     -     2"/>
-
         </LinearLayout>
 
         <LinearLayout

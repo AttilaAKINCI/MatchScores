@@ -74,7 +74,7 @@ dependencies {
     //UI RELATED
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     // Image cache and usage : Glide

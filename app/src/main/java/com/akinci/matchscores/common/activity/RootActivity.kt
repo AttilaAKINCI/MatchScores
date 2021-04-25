@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.NavigationUI
 import com.akinci.matchscores.databinding.ActivityRootBinding
 
 abstract class RootActivity : AppCompatActivity()  {
@@ -30,18 +29,9 @@ abstract class RootActivity : AppCompatActivity()  {
         navigationController = navHostFragment.navController
         navigationController.graph = navGraph
 
-        // tell navigation controller that which fragments will be at the top of backstack
-        // (hides backbutton for fragments which are placed at top)
-        val appBarConfiguration = AppBarConfiguration(getFragmentsThatHidesBackButton())
-
-        // remove extra padding between arrow and toolbar title
-        binding.toolbar.contentInsetStartWithNavigation = 10
-
-        setSupportActionBar(binding.toolbar)
-        binding.toolbar.setupWithNavController(navigationController, appBarConfiguration)
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
+        NavigationUI.setupWithNavController(binding.bottomNav, navigationController)
     }
 
     abstract fun getNavigationGraph() : Int
-    abstract fun getFragmentsThatHidesBackButton() : Set<Int>
+    fun setBottomNavigationVisibility(isVisible : Int) { binding.bottomNav.visibility = isVisible }
 }

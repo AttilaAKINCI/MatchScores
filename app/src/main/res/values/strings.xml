@@ -1,28 +1,23 @@
 <resources>
-    <string name="app_name">MatchScores</string>
+    <string name="app_name">Match Scores</string>
+
+    <!-- Splash -->
+    <string name="lottie_balls">balls.json</string>
 
     <!-- News List -->
-    <string name="news_title">Haberler</string>
-    <string name="news_no_data">Bugün için henüz yeni bir haber yok</string>
-    <string name="accessibility_news_information_nodata">News Listing no data</string>
-    <string name="accessibility_news_information_network_err">News Listing network error</string>
-    <string name="accessibility_news_row_image">News Image</string>
+    <string name="news_title">News</string>
+    <string name="news_info_text">Welcome !! \n\nMatch Scores App is the best choice for follow breaking news about any king of sports !! </string>
+    <string name="accessibility_string">Accessibility Image View</string>
 
     <!-- News Detail -->
-    <string name="news_detail_title">Haber Detayı</string>
+    <string name="news_detail_title">News Detail</string>
 
     <!-- Scores -->
-    <string name="scores_title">Skorlar</string>
-    <string name="scores_title_2">Skorlar (komponent tasarımı)</string>
-    <string name="scores_no_data">Skor bilgisi bulunamadı.</string>
+    <string name="scores_title">Scores</string>
+    <string name="scores_info_text">Live Scores !! \n\nFor each recent games, you can find out match scores! This page updates automatically for an interval. Just watch live updates on the screen :) </string>
 
     <!-- Standings -->
-    <string name="standings_title">Statüler</string>
-    <string name="standings_detail">Waiting For Implementation</string>
-
-    <!-- App-wide general messages -->
-    <string name="network_err">Bağlantı sorunu oluştu. Lütfen daha sonra tekrar deneyin.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="standings_title">Standings</string>
+    <string name="standings_detail">General Note: \n\nAccording to task assignment this fragment page should be empty but should be ready for implementation.</string>
 
 </resources>

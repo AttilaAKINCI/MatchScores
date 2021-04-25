@@ -1,90 +1,9 @@
 package com.akinci.matchscores
 
-import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
-import com.akinci.matchscores.common.component.base.BaseFragment
-import com.akinci.matchscores.common.component.DropDownMenu
-import com.akinci.matchscores.databinding.ActivityRootBinding
+import com.akinci.matchscores.common.activity.RootActivity
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    private lateinit var navigationController: NavController
-    private lateinit var binding : ActivityRootBinding
-
-    lateinit var fragment : BaseFragment
-    private var selectedMenuItem = DropDownMenu.DropDownItems.NEWS
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_root)
-
-        // setup navigation
-        navigationController = findNavController(R.id.nav_host_fragment)
-        // tell navigation controller that which fragments will be at the top of backstack
-        // (hides backbutton for fragments which are placed at top)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.splashScreenFragment,
-                R.id.newsFragment,
-                R.id.scoresFragment,
-                R.id.scoreFragmentWithComponent,
-                R.id.standingsFragment )
-        )
-
-        // remove extra padding between arrow and toolbar title
-        binding.toolbar.contentInsetStartWithNavigation = 10
-        binding.toolbar.addDropDownMenuIcon()
-        binding.toolbar.clickListener = View.OnClickListener {
-            if(binding.toolbar.dropDownActive){
-                binding.dropDownMenu.visibility = View.VISIBLE
-            } else {
-                binding.dropDownMenu.visibility = View.GONE
-            }
-        }
-
-        binding.dropDownMenu.dropDownClickListener = (object : DropDownClickListener {
-            override fun dropDownClicked(item: DropDownMenu.DropDownItems) {
-                    closeDropDown()
-                    if(selectedMenuItem != item){
-                        when(item){
-                            DropDownMenu.DropDownItems.NEWS -> {
-                                Timber.d("Dropdown clicked for NEWS")
-                                navigationController.navigate(R.id.newsFragment)
-                            }
-                            DropDownMenu.DropDownItems.SCORES -> {
-                                Timber.d("Dropdown clicked for SCORES")
-                                navigationController.navigate(R.id.scoresFragment)
-                            }
-                            DropDownMenu.DropDownItems.SCORES_AS_COMPONENT -> {
-                                Timber.d("Dropdown clicked for SCORES AS COMPONENT")
-                                navigationController.navigate(R.id.scoreFragmentWithComponent)
-                            }
-                            DropDownMenu.DropDownItems.STANDINGS -> {
-                                Timber.d("Dropdown clicked for STANDINGS")
-                                navigationController.navigate(R.id.standingsFragment)
-                            }
-                        }
-                    }
-                    selectedMenuItem = item
-                }
-            })
-
-        setSupportActionBar(binding.toolbar)
-        binding.toolbar.setupWithNavController(navigationController, appBarConfiguration)
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
-    }
-
-    fun showDropDownMenu(isShown : Int){ binding.toolbar.showDropDownMenuIcon(isShown) }
-    private fun closeDropDown(){
-        binding.dropDownMenu.visibility = View.GONE
-        binding.toolbar.closeDropDownIcon()
-    }
+class MainActivity : RootActivity() {
+    override fun getNavigationGraph(): Int = R.navigation.navigation_root
 }

@@ -1,17 +1,20 @@
 package com.akinci.matchscores.features.news.list.view
 
+import android.graphics.Shader
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.akinci.matchscores.R
+import com.akinci.matchscores.common.activity.RootActivity
 import com.akinci.matchscores.common.component.SnackBar
-import com.akinci.matchscores.common.component.adapter.ShimmerAdapter
+import com.akinci.matchscores.common.component.TileDrawable
+import com.akinci.matchscores.common.component.listview.ShimmerAdapter
+import com.akinci.matchscores.common.component.listview.viewholder.ShimmerViewHolderTypeFactory.Companion.NEWS_SHIMMER_VIEW
 import com.akinci.matchscores.common.helper.Resource
 import com.akinci.matchscores.databinding.FragmentNewsBinding
 import com.akinci.matchscores.features.news.list.adapter.NewsListAdapter
@@ -26,8 +29,8 @@ class NewsFragment : Fragment() {
     private lateinit var binding : FragmentNewsBinding
     private val newsViewModel : NewsViewModel by activityViewModels()
 
-    private val shimmerAdapter = ShimmerAdapter()
-    lateinit var newsListAdapter : NewsListAdapter
+    private val shimmerAdapter = ShimmerAdapter(NEWS_SHIMMER_VIEW)
+    private lateinit var newsListAdapter : NewsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +38,16 @@ class NewsFragment : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_news, container, false)
+        /** Initialization of ViewBinding not need for DataBinding here **/
+        binding = FragmentNewsBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.vm = newsViewModel
 
-        // show action bar
-        (activity as AppCompatActivity).supportActionBar?.show()
+        // show bottom navigation view.
+        (activity as RootActivity).setBottomNavigationVisibility(View.VISIBLE)
+
+        // set tile background
+        val backgroundDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_pattern)
+        binding.tileBackground.setImageDrawable(TileDrawable(backgroundDrawable!!, Shader.TileMode.REPEAT))
 
         // news listing adapter
         newsListAdapter = NewsListAdapter(clickListener = { newsLink ->
