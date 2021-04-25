@@ -6,7 +6,6 @@
 
     <!-- News List -->
     <string name="news_title">News</string>
-    <string name="news_no_data">There is not any updates today</string>
     <string name="news_info_text">Welcome !! \n\nMatch Scores App is the best choice for follow breaking news about any king of sports !! </string>
     <string name="accessibility_string">Accessibility Image View</string>
 
@@ -16,13 +15,9 @@
     <!-- Scores -->
     <string name="scores_title">Scores</string>
     <string name="scores_info_text">Live Scores !! \n\nFor each recent games, you can find out match scores! This page updates automatically for an interval. Just watch live updates on the screen :) </string>
-    <string name="scores_no_data">There is not any score detail</string>
 
     <!-- Standings -->
     <string name="standings_title">Standings</string>
     <string name="standings_detail">General Note: \n\nAccording to task assignment this fragment page should be empty but should be ready for implementation.</string>
-
-    <!-- App-wide general messages -->
-    <string name="network_err">Connection error occurred. Please try again later</string>
 
 </resources>

@@ -1,7 +1,6 @@
 package com.akinci.matchscores.features.scores.data.output
 
 import com.squareup.moshi.JsonClass
-import java.util.*
 
 @JsonClass(generateAdapter = true)
 data class ScoresResponse (

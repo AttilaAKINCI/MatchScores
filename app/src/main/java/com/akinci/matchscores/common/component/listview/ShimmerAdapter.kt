@@ -4,9 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.akinci.matchscores.common.component.listview.viewholder.ShimmerViewHolderTypeFactory
-import com.akinci.matchscores.databinding.RowCardShimmerBinding
-import com.akinci.matchscores.features.scores.adapter.viewholder.ViewHolderTypeFactory
-import com.akinci.matchscores.features.scores.data.output.Score
 
 class ShimmerAdapter(
     val type : Int,

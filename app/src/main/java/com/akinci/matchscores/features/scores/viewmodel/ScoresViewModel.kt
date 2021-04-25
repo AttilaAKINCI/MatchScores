@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.akinci.matchscores.common.coroutine.CoroutineContextProvider
 import com.akinci.matchscores.common.helper.Resource
-import com.akinci.matchscores.features.news.list.data.output.NewsResponse
 import com.akinci.matchscores.features.scores.data.output.Score
 import com.akinci.matchscores.features.scores.repository.ScoresRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

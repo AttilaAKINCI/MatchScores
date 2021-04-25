@@ -30,7 +30,7 @@ class NewsFragment : Fragment() {
     private val newsViewModel : NewsViewModel by activityViewModels()
 
     private val shimmerAdapter = ShimmerAdapter(NEWS_SHIMMER_VIEW)
-    lateinit var newsListAdapter : NewsListAdapter
+    private lateinit var newsListAdapter : NewsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

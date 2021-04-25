@@ -1,13 +1,10 @@
 package com.akinci.matchscores.common.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import com.akinci.matchscores.databinding.ActivityRootBinding
 
 abstract class RootActivity : AppCompatActivity()  {
