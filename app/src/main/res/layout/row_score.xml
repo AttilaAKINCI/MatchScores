@@ -11,6 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         android:baselineAligned="false">
 
@@ -27,7 +29,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp"
                 android:layout_margin="10dp"
-                android:text="teamA"
+                android:text="@{data.teamNameA}"
                 tools:text="Arjantin"/>
 
         </LinearLayout>
@@ -47,9 +49,8 @@
                 android:layout_margin="10dp"
                 android:layout_gravity="center"
                 android:textAlignment="center"
-                android:text="1     -     2"
+                android:text="@{String.valueOf(data.fts_A) + `     -     ` + String.valueOf(data.fts_B)}"
                 tools:text="2     -     2"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -66,7 +67,7 @@
                 android:textSize="14sp"
                 android:textAlignment="textEnd"
                 android:layout_margin="10dp"
-                android:text="teamb"
+                android:text="@{data.teamNameB}"
                 tools:text="Belarus"/>
 
         </LinearLayout>

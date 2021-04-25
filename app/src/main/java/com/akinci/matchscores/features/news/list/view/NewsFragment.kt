@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -15,7 +13,8 @@ import com.akinci.matchscores.R
 import com.akinci.matchscores.common.activity.RootActivity
 import com.akinci.matchscores.common.component.SnackBar
 import com.akinci.matchscores.common.component.TileDrawable
-import com.akinci.matchscores.common.component.adapter.ShimmerAdapter
+import com.akinci.matchscores.common.component.listview.ShimmerAdapter
+import com.akinci.matchscores.common.component.listview.viewholder.ShimmerViewHolderTypeFactory.Companion.NEWS_SHIMMER_VIEW
 import com.akinci.matchscores.common.helper.Resource
 import com.akinci.matchscores.databinding.FragmentNewsBinding
 import com.akinci.matchscores.features.news.list.adapter.NewsListAdapter
@@ -30,7 +29,7 @@ class NewsFragment : Fragment() {
     private lateinit var binding : FragmentNewsBinding
     private val newsViewModel : NewsViewModel by activityViewModels()
 
-    private val shimmerAdapter = ShimmerAdapter()
+    private val shimmerAdapter = ShimmerAdapter(NEWS_SHIMMER_VIEW)
     lateinit var newsListAdapter : NewsListAdapter
 
     override fun onCreateView(

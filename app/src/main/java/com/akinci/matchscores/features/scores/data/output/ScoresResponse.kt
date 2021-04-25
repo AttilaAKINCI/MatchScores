@@ -9,6 +9,5 @@ data class ScoresResponse (
     val format : String,
     val date : String,
     val matches : List<Match>,
-    val groups : List<Objects>,
     val displayRound : Boolean
 )

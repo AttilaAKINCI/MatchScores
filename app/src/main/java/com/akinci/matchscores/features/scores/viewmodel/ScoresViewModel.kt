@@ -10,7 +10,9 @@ import com.akinci.matchscores.features.news.list.data.output.NewsResponse
 import com.akinci.matchscores.features.scores.data.output.Score
 import com.akinci.matchscores.features.scores.repository.ScoresRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.ticker
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,17 +22,17 @@ import java.util.*
 import javax.inject.Inject
 
 @ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 @HiltViewModel
 class ScoresViewModel @Inject constructor(
     private val coroutineContext: CoroutineContextProvider,
     private val scoresRepository: ScoresRepository
 ) : ViewModel() {
-
     // score table data
-    private val _scores = MutableLiveData<Resource<Score>>()
-    val scores : LiveData<Resource<Score>> = _scores
+    private val _scores = MutableLiveData<Resource<List<Score>>>()
+    val scores : LiveData<Resource<List<Score>>> = _scores
 
-    private var tickerChannel = ticker(delayMillis = 30_000, initialDelayMillis = 0)
+    private lateinit var tickerChannel : ReceiveChannel<Unit>
     override fun onCleared() {
         tickerChannel.cancel()
         super.onCleared()
@@ -40,84 +42,76 @@ class ScoresViewModel @Inject constructor(
         Timber.d("ScoresViewModel created..")
     }
 
-    fun fetchScores() {
-        // fetch scores once
-//        if(_scores.value == null){
-//            viewModelScope.launch(coroutineContext.IO) {
-//                Timber.tag("fetchMatches-VMScope").d("Top-level: current thread is ${Thread.currentThread().name}")
-//
-//                delay(1000) // simulate network delay
-//
-//                when (val scoresModel = scoresRepository.fetchScores()) {
-//                    is Resource.Success -> {
-//
-//                    }
-//                    is Resource.Error -> {
-//                        // error occurred while fetching scores
-//                        _scores.postValue(Resource.Error(scoresModel.message))
-//                    }
-//                }
-//            }
-//        }
-//
-//        viewModelScope.launch(coroutineContext.IO) {
-//            Timber.tag("fetchNews-VMScope").d("Top-level: current thread is ${Thread.currentThread().name}")
-//
-//            delay(1000) // simulate network delay
-//
-//            when(val scoresModel = scoresRepository.fetchScores()) {
-//                is Resource.Success -> {
-//
-//                }
-//                is Resource.Error -> {
-//                    // error occurred while fetching scores
-//                    _news.postValue(Resource.Error(scoresModel.message))
-//                }
-//            }
-//
-//            try {
-//
-//                for (event in tickerChannel) {
-//
-//                    if(scoresModel.matches.isNotEmpty()){
-//
-//                        val localScore = mutableListOf<Score>()
-//                        //provide header data
-//                        val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("tr")).parse(scoresModel.date)
-//                        var formattedDate = ""
-//                        date?.let {
-//                            formattedDate = SimpleDateFormat("d MMMM y", Locale("tr")).format(date)
-//                        }
-//
-//                        val title = "${scoresModel.name} - $formattedDate"
-//                        localScore.add(Score(title))
-//
-//                        scoresModel.matches.map {
-//                            localScore.add(
-//                                Score(
-//                                it.id,
-//                                it.fts_A,
-//                                it.fts_B,
-//                                it.team_A.name,
-//                                it.team_B.name
-//                            )
-//                            )
-//                        }
-//
-//                        scores.value = localScore
-//                        Timber.d("Score api service fetched ${scoresModel.matches.size} matches")
-//                    }else{
-//                        Timber.d("News List no data..")
-//                        isNodata.value = true
-//                    }
-//                }
-//            } catch (exception: Exception) {
-//                Timber.e("News List retrofit api error : ${exception.message}")
-//                isNetworkError.value = true
-//            }
-//        }
-
+    fun stopTicker(){ tickerChannel.cancel() }
+    fun initiateTicker(){
+        val startDelay = if(_scores.value == null){ 0L } else { 30_000 }
+        tickerChannel = ticker(delayMillis = 30_000, initialDelayMillis = startDelay)
+        viewModelScope.launch(coroutineContext.IO) {
+            try {
+                for (event in tickerChannel){
+                    fetchScores()
+                }
+            }catch (ex : Exception){
+                Timber.d("Score detail fetch failed with exception ${ex.message}")
+            }
+        }
     }
 
+    fun fetchScores() {
+        // fetch scores once
+        viewModelScope.launch(coroutineContext.IO) {
+            Timber.tag("fetchScores-VMScope").d("Top-level: current thread is ${Thread.currentThread().name}")
+
+            if(_scores.value == null){
+                _scores.postValue(Resource.Loading())
+                delay(1000)
+            }
+
+            when (val response = scoresRepository.fetchScores()) {
+                is Resource.Success -> {
+                    // fetch data and modify a little in order to manage better.
+                    response.data?.let{
+                        if(it.matches.isNotEmpty()){
+                            val scoreList = mutableListOf<Score>()
+
+                            //provide header data
+                            val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("tr")).parse(it.date)
+                            var formattedDate = ""
+                            date?.let {
+                                formattedDate = SimpleDateFormat("d MMMM y", Locale("tr")).format(date)
+                            }
+
+                            val title = "${it.name} - $formattedDate"
+                            scoreList.add(Score(title))
+
+                            it.matches.map { match ->
+                                scoreList.add(
+                                    Score(
+                                        match.id,
+                                        match.fts_A,
+                                        match.fts_B,
+                                        match.team_A.name,
+                                        match.team_B.name
+                                    )
+                                )
+                            }
+
+                            _scores.postValue(Resource.Success(scoreList))
+                            Timber.d("Score api service fetched ${it.matches.size} matches")
+
+                        } else {
+                            // there is not any score data
+                            _scores.postValue(Resource.Info("There is not any score data"))
+                        }
+                    }
+                }
+                is Resource.Error -> {
+                    // error occurred while fetching scores
+                    _scores.postValue(Resource.Error(response.message))
+                }
+            }
+
+        }
+    }
 
 }
