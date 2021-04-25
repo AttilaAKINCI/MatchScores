@@ -1,14 +1,17 @@
 package com.akinci.matchscores.features.scores.view
 
+import android.graphics.Shader
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.akinci.matchscores.R
+import com.akinci.matchscores.common.component.TileDrawable
 import com.akinci.matchscores.common.component.adapter.ShimmerAdapter
 import com.akinci.matchscores.databinding.FragmentScoresBinding
 import com.akinci.matchscores.features.scores.adapter.ScoresListAdapter
@@ -33,9 +36,13 @@ class ScoresFragment : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scores, container, false)
+        /** Initialization of ViewBinding not need for DataBinding here **/
+        binding = FragmentScoresBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.vm = scoresViewModel
+
+        // set tile background
+        val backgroundDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_pattern)
+        binding.tileBackground.setImageDrawable(TileDrawable(backgroundDrawable!!, Shader.TileMode.REPEAT))
 
         // news listing adapter
         scoreListAdapter = ScoresListAdapter()
