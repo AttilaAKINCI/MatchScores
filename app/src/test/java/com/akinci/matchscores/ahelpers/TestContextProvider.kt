@@ -6,7 +6,7 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlin.coroutines.CoroutineContext
 
 @ExperimentalCoroutinesApi
-class TestContextProvider(testCoroutineDispatcher : TestCoroutineDispatcher = TestCoroutineDispatcher()): CoroutineContextProvider() {
+class TestContextProvider(val testCoroutineDispatcher : TestCoroutineDispatcher = TestCoroutineDispatcher()): CoroutineContextProvider() {
     override val Main: CoroutineContext = testCoroutineDispatcher
     override val IO: CoroutineContext = testCoroutineDispatcher
 }
