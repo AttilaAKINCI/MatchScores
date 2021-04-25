@@ -44,7 +44,9 @@ Fragments :
 
 ## Developer Comments
 According to task section application is developed. rather than creating a dropdown menu, bottom navigation view (with navigation component) is used on application sample.
+
 Feature layers are separated with MVVM design parttern, Data layers are separated with Repository pattern and multiview usage on RecyclerView is separetad with Visitor pattern. 
+
 Unit test cases is created with MockK Lib. 
 
 ## Task
