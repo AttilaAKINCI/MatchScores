@@ -1,6 +1,10 @@
 # MatchScores
 MatchScores App is a sample platform which provides information about sport news, scores and standings.
 
+> [!NOTE]
+> Please be aware, this repository ontains legacy implementations and arhitectures.
+> It's no longer possible to refactor, modernize due to lack of data source. it's arhieved and won't be supperted in the future.
+
 ## UI
 MatchScores application consist of 5 different fragments and 1 root activity. Activity holds a container layout in order to manage fragments which will be controlled by navigation component.
 
